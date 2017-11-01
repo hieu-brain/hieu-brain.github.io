@@ -46,7 +46,46 @@
   <script>
   // Component HOME
   var home = Vue.extend({
-    'template': '<router-view></router-view> '
+    'template': '<router-view></router-view> ',
+    data: function () {
+      return {
+        params: {
+          title: 'website name',
+          description: 'website description',
+          image: false,
+          app: 'app name',          
+        }
+      }
+    },
+    mounted: function(){
+      var self = this
+      window.setTimeout(function () {
+        self.params.title = 'new website name'
+        self.$emit('updateHead')
+      }, 3000)
+    },
+    'template': '<h1>BLOG</h1>',
+    head: {
+      title: function () {
+        return {
+          inner: this.params.title,
+          separator: ' ',
+          complement: ' '
+        }
+      },
+      meta:  function () {
+        return [
+          { name: 'application-name', content: this.params.app },
+          { name: 'description', content: this.params.description },
+          { name: 'twitter:title', content: this.params.title },
+          { n: 'twitter:description', c: this.params.description},
+          { p: 'og:url', c: "http://www.nytimes.com/2015/02/19/arts/international/when-great-minds-dont-think-alike.html" },
+          { p: 'og:type', c: "When Great Minds Don’t Think Alike" },
+          { p: 'og:type', c: "article" },
+          { p: 'og:image', c: "http://static01.nyt.com/images/2015/02/19/arts/international/19iht-btnumbers19A/19iht-btnumbers19A-facebookJumbo-v2.jpg" },
+        ]
+      }
+    }
   })
   // Component ABOUT
   var about = Vue.extend({
